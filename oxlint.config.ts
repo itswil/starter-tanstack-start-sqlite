@@ -1,6 +1,5 @@
 import { defineConfig } from "oxlint";
 
 export default defineConfig({
-  ignorePatterns: ["dist/**"],
-  plugins: [],
+  ignorePatterns: ["dist/**", "*.min.js", "routeTree.gen.ts"],
 });

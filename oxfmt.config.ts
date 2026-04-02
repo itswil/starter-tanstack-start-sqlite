@@ -1,5 +1,5 @@
 import { defineConfig } from "oxfmt";
 
 export default defineConfig({
-  ignorePatterns: ["dist/**", "*.min.js"],
+  ignorePatterns: ["dist/**", "*.min.js", "routeTree.gen.ts"],
 });
