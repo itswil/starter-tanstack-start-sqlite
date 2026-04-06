@@ -6,5 +6,8 @@
   "editor.formatOnSave": true,
   "[jsonc]": {
     "editor.defaultFormatter": "oxc.oxc-vscode"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "oxc.oxc-vscode"
   }
 }
