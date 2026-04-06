@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { createFileRoute, useRouter } from "@tanstack/react-router";
-import { getUsersFn, addUserFn } from "../modules/users/users.functions";
+import { getUsersFn, addUserFn, deleteUserFn } from "../modules/users/users.functions";
 
 export const Route = createFileRoute("/")({
   loader: async () => {
@@ -18,7 +18,7 @@ function Home() {
   const [isAdding, setIsAdding] = useState(false);
   const [error, setError] = useState("");
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.SubmitEvent) => {
     e.preventDefault();
     setError("");
     setIsAdding(true);
@@ -32,6 +32,15 @@ function Home() {
       setError(err instanceof Error ? err.message : "Failed to add user");
     } finally {
       setIsAdding(false);
+    }
+  };
+
+  const handleDelete = async (id: number) => {
+    try {
+      await deleteUserFn({ data: { id } });
+      router.invalidate();
+    } catch (err) {
+      console.error(err);
     }
   };
 
@@ -67,18 +76,23 @@ function Home() {
         >
           {isAdding ? "Adding..." : "Add User"}
         </button>
-        {error && (
-          <div className="text-red-500 text-sm">{error}</div>
-        )}
+        {error && <div className="text-red-500 text-sm">{error}</div>}
       </form>
       <ul className="space-y-2">
         {users.map((user) => (
-          <li key={user.id} className="text-sm text-gray-600">
+          <li key={user.id} className="text-sm text-gray-600 flex items-center gap-2">
             <span className="font-medium">{user.name}</span>
-            <span className="text-gray-400 mx-2">·</span>
+            <span className="text-gray-400">·</span>
             <span>{user.email}</span>
-            <span className="text-gray-400 mx-2">·</span>
+            <span className="text-gray-400">·</span>
             <span className="text-gray-400">Age {user.age}</span>
+            <button
+              type="button"
+              onClick={() => handleDelete(user.id)}
+              className="text-red-500 hover:text-red-700 ml-2"
+            >
+              Remove
+            </button>
           </li>
         ))}
       </ul>

@@ -1,4 +1,5 @@
 import { int, sqliteTable, text } from "drizzle-orm/sqlite-core";
+import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod";
 
 export const usersTable = sqliteTable("users_table", {
@@ -8,8 +9,8 @@ export const usersTable = sqliteTable("users_table", {
   email: text().notNull().unique(),
 });
 
-export const insertUserSchema = z.object({
-  name: z.string().min(1),
-  age: z.coerce.number().int().positive(),
-  email: z.email(),
+export const insertUserSchema = createInsertSchema(usersTable);
+
+export const deleteUserSchema = z.object({
+  id: z.number(),
 });
