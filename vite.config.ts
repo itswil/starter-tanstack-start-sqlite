@@ -9,14 +9,5 @@ export default defineConfig({
   server: {
     port: 3000,
   },
-  plugins: [
-    nitro({
-      output: {
-        dir: "dist",
-      },
-    }),
-    tanstackStart(),
-    tailwindcss(),
-    viteReact(),
-  ],
+  plugins: [tailwindcss(), tanstackStart(), nitro(), viteReact()],
 });

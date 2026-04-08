@@ -13,7 +13,7 @@
     "db:gen": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate",
     "preview": "vite preview",
-    "start": "node dist/server/index.mjs"
+    "start": "node .output/server/index.mjs"
   },
   "dependencies": {
     "@tanstack/react-router": "^1.168.10",
