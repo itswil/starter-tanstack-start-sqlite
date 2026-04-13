@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { createFileRoute, useRouter } from "@tanstack/react-router";
+import { randFullName, randEmail, randNumber } from "@ngneat/falso";
 import { getUsersFn, addUserFn, deleteUserFn } from "../modules/users/users.functions";
 
 export const Route = createFileRoute("/")({
@@ -75,6 +76,17 @@ function Home() {
           className="bg-blue-500 text-white px-4 py-2 rounded"
         >
           {isAdding ? "Adding..." : "Add User"}
+        </button>
+        <button
+          type="button"
+          onClick={() => {
+            setName(randFullName());
+            setEmail(randEmail());
+            setAge(String(randNumber({ min: 18, max: 80 })));
+          }}
+          className="ml-2 bg-gray-200 text-gray-700 px-4 py-2 rounded"
+        >
+          Fill Fake
         </button>
         {error && <div className="text-red-500 text-sm">{error}</div>}
       </form>
