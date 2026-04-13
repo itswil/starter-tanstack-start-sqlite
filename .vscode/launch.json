@@ -1,0 +1,34 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "node-terminal",
+      "name": "Debug: Server (TanStack Start)",
+      "request": "launch",
+      "command": "pnpm run dev",
+      "cwd": "${workspaceFolder}"
+    },
+    {
+      "type": "chrome",
+      "name": "Debug: Client (Browser)",
+      "request": "launch",
+      "url": "http://localhost:3000",
+      "webRoot": "${workspaceFolder}",
+      "skipFiles": [
+        "${workspaceFolder}/node_modules/**/*.js",
+        "<node_internals>/**/*.js",
+        "**/node_modules/**"
+      ],
+      "sourceMapPathOverrides": {
+        "http://localhost:3000/src/*": "${webRoot}/src/*"
+      },
+      "smartStep": true
+    }
+  ],
+  "compounds": [
+    {
+      "name": "Debug: Full Stack",
+      "configurations": ["Debug: Server (TanStack Start)", "Debug: Client (Browser)"]
+    }
+  ]
+}
