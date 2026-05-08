@@ -6,7 +6,8 @@
       "name": "Debug: Server (TanStack Start)",
       "request": "launch",
       "command": "pnpm run dev",
-      "cwd": "${workspaceFolder}"
+      "cwd": "${workspaceFolder}",
+      "autoAttachChildProcesses": true
     },
     {
       "type": "chrome",
@@ -20,7 +21,11 @@
         "**/node_modules/**"
       ],
       "sourceMapPathOverrides": {
-        "http://localhost:3000/src/*": "${webRoot}/src/*"
+        "http://localhost:3000/src/*?*": "${webRoot}/src/*",
+        "webpack:///./src/*?*": "${webRoot}/src/*",
+        "webpack:///./src/*": "${webRoot}/src/*",
+        "webpack:///*": "*",
+        "/*": "${webRoot}/*"
       },
       "smartStep": true
     }
